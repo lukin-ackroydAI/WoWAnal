@@ -1,6 +1,7 @@
-name: Update Code and Pull from Repository
+name: Update Code and Push to Repository
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -12,17 +13,24 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.GH_PAT }}
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '20'
 
-    - name: Pull latest code
+    - name: Make code changes
       run: |
-        git config --global user.email "your-email@example.com"
-        git config --global user.name "Your Name"
-        git pull origin main
-        echo "Repository updated"
+        # Add your code changes here
+        # For example, you can run a script to update the codebase
+        echo "Making code changes"
+        
+    - name: Commit and push changes
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add .
+        git commit -m "Automated code update"
+        git push "https://${GH_TOKEN}@github.com/${{ github.repository }}.git"
