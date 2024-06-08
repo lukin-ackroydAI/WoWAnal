@@ -1,4 +1,4 @@
-name: Update Code and Clear Cache
+name: Update Code and Pull from Repository
 
 on:
   push:
@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GH_PAT }}
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -20,11 +22,7 @@ jobs:
 
     - name: Pull latest code
       run: |
+        git config --global user.email "your-email@example.com"
+        git config --global user.name "Your Name"
         git pull origin main
         echo "Repository updated"
-
-    - name: Clear cache
-      run: |
-        rm -rf node_modules
-        npm cache clean --force
-        echo "Cache cleared"
