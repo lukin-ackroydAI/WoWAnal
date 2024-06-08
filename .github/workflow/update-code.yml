@@ -1,4 +1,4 @@
-name: Update Code and Pull from Repository
+name: Update Code and Clear Cache
 
 on:
   push:
@@ -18,5 +18,13 @@ jobs:
       with:
         node-version: '20'
 
-    - name: Run JavaScript Action
-      run: node main.js
+    - name: Pull latest code
+      run: |
+        git pull origin main
+        echo "Repository updated"
+
+    - name: Clear cache
+      run: |
+        rm -rf node_modules
+        npm cache clean --force
+        echo "Cache cleared"
