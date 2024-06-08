@@ -18,10 +18,5 @@ jobs:
       with:
         node-version: '20'
 
-    - name: Pull latest code
-      run: |
-        git pull origin main
-        echo "Repository updated"
-
     - name: Run JavaScript Action
-      uses: ./
+      run: node main.js
