@@ -1,0 +1,19 @@
+name: Update Code and Pull from Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-code:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Pull latest code
+      run: |
+        git pull origin main
+        echo "Repository updated"
