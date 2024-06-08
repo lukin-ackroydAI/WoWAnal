@@ -1,0 +1,5 @@
+name: 'Update Code Action'
+description: 'This action updates the code and pulls from the repository'
+runs:
+  using: 'node20'
+  main: 'main.js'
